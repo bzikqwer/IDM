@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Semenov D.S.">
+    <title>{% block title %}IDMBD{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="wrapper">
+        <header>
+            <div class="header-container">
+                <h1>KMF - IDMBD</h1>
+                <nav>
+                    {% if session.get('logged_in') %}
+                        <a href="{{ url_for('select_db') }}">Выбор БД</a>
+                        <a href="{{ url_for('logout') }}">Выход</a>
+                    {% endif %}
+                </nav>
+            </div>
+        </header>
+        <main>
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    <div class="messages">
+                        {% for category, message in messages %}
+                            <div class="alert alert-{{ category }}">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            {% endwith %}
+            {% block content %}{% endblock %}
+        </main>
+        <footer>
+            <p>&copy; 2025 KMF. Все права защищены.</p>
+            <p class="author">Designed by Semenov D.S.</p>
+        </footer>
+    </div>
+</body>
+</html>

@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block title %}Результаты запроса - IDMBD{% endblock %}
+
+{% block content %}
+<section class="form-section">
+    <h2>База данных: {{ selected_db }}</h2>
+    <p class="incomplete-count">Количество не заполненных пользователей: {{ incomplete_count }}</p>
+    <form method="post">
+        <table>
+            <thead>
+                <tr>
+                    <th>Username</th>
+                    <th>Account Status</th>
+                    <th>Номер заявки</th>
+                    <th>Описание</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in table_data %}
+                    {% set incomplete = (row["номер_заявки"] == '' or row["описание"] == '') %}
+                    <tr class="{{ 'incomplete' if incomplete }}">
+                        <td>
+                            {{ row.username }}
+                            <input type="hidden" name="username_{{ loop.index0 }}" value="{{ row.username }}">
+                        </td>
+                        <td>{{ row.account_status }}</td>
+                        <td>
+                            <input type="text" name="номер_заявки_{{ loop.index0 }}" value="{{ row.номер_заявки }}">
+                        </td>
+                        <td>
+                            <input type="text" name="описание_{{ loop.index0 }}" value="{{ row.описание }}">
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <button type="submit" class="btn">Обновить данные</button>
+    </form>
+</section>
+{% endblock %}

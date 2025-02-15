@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}Выбор базы данных - IDMBD{% endblock %}
+
+{% block content %}
+<section class="form-section">
+    <h2>Выберите базу данных</h2>
+    <form method="post">
+        <div class="form-group">
+            <select name="db" required>
+                <option value="" disabled selected>-- выберите базу --</option>
+                {% for db in db_list %}
+                    <option value="{{ db.name }}">
+                        {{ db.name }} (Host: {{ db.host }}, Port: {{ db.port }}, Service: {{ db.service }})
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
+        <button type="submit" class="btn">Далее</button>
+    </form>
+</section>
+{% endblock %}
