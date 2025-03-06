@@ -1,13 +1,20 @@
 {% extends "base.html" %}
-
 {% block title %}Выбор базы данных - IDMBD{% endblock %}
 
 {% block content %}
 <section class="form-section">
     <h2>Выберите базу данных</h2>
+
+    <!-- Пустой блок, куда будет вставляться информация о базах -->
+    <div id="db-info-block" class="alert alert-info" style="display: none;">
+        <h3>Результаты проверки баз</h3>
+        <div id="db-info-content"></div>
+    </div>
+
     <form method="post">
         <div class="form-group">
-            <select name="db" required>
+            <label for="db">База данных:</label>
+            <select name="db" id="db" required>
                 <option value="" disabled selected>-- выберите базу --</option>
                 {% for db in db_list %}
                     <option value="{{ db.name }}">
@@ -19,4 +26,7 @@
         <button type="submit" class="btn">Далее</button>
     </form>
 </section>
+
+<!-- Подключаем наш js-файл после HTML-контента -->
+<script src="{{ url_for('static', filename='js/check_dbs.js') }}"></script>
 {% endblock %}
