@@ -13,7 +13,3 @@ DB_CONFIGS = {
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 SQLITE_DB = os.path.join(BASE_DIR, 'users.db')
 
-# Данные для Telegram
-TELEGRAM_BOT_TOKEN = '7759968140:AAGR1CpKenY9v7m-FPpqYVHUQQi6MOhDxAI'
-TELEGRAM_CHAT_ID = 'https://t.me/+tfCBpFIPbjNmNjBi'  # например, 123456789
-#7759968140:AAGR1CpKenY9v7m-FPpqYVHUQQi6MOhDxAI

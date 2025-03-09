@@ -6,12 +6,15 @@
 <section class="form-section">
     <h2>База данных: {{ selected_db }}</h2>
     <p class="incomplete-count">Количество не заполненных пользователей: {{ incomplete_count }}</p>
+
+    <!-- Форма для обновления полей в локальной БД -->
     <form method="post">
-        <table>
+        <table id="users-table">
             <thead>
                 <tr>
                     <th>Username</th>
-                    <th>Account Status</th>
+                    <!-- Столбец для сортировки -->
+                    <th id="status-header">Account Status</th>
                     <th>Номер заявки</th>
                     <th>Описание</th>
                 </tr>
@@ -37,5 +40,14 @@
         </table>
         <button type="submit" class="btn">Обновить данные</button>
     </form>
+
+    <!-- Кнопка для экспорта CSV на стороне клиента, без похода на сервер -->
+    <button type="button" class="btn" id="export-csv-btn" style="margin-top: 20px;">
+        Экспорт в CSV (JS)
+    </button>
 </section>
+
+<!-- Подключаем JS-файлы (пути меняйте под свою структуру проекта) -->
+<script src="{{ url_for('static', filename='js/export_csv.js') }}"></script>
+<script src="{{ url_for('static', filename='js/sort_table.js') }}"></script>
 {% endblock %}
